@@ -202,12 +202,10 @@ st.sidebar.title("📚 Navigasi")
 selection = st.sidebar.radio("Pilih Materi:", list(materi.keys()))
 
 # --- RESET SESSION STATE ---
-if "show_preview" not in st.session_state or "last_selection" not in st.session_state:
-    st.session_state.show_preview = False
+if "last_selection" not in st.session_state:
     st.session_state.last_selection = selection
 
 if st.session_state.last_selection != selection:
-    st.session_state.show_preview = False
     st.session_state.last_selection = selection
 
 # --- HEADER ---
@@ -231,17 +229,9 @@ if selection == "Halaman Utama":
 else:
     st.header(selection)
     
-    # 1. Preview PDF
-    st.subheader("🖼️ Preview Materi")
-    if not st.session_state.show_preview:
-        if st.button(f"🔍 Buka Full PDF {selection}", type="primary"):
-            st.session_state.show_preview = True
-            st.rerun()
-    else:
-        if st.button("✖️ Tutup Preview PDF"):
-            st.session_state.show_preview = False
-            st.rerun()
-        render_pdf(current["file"])
+    # 1. Materi
+    st.subheader("🖼️ Materi")
+    render_pdf(current["file"])
     
     st.divider()
 
