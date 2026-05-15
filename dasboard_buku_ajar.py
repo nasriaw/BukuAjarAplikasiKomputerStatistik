@@ -212,16 +212,21 @@ if st.session_state.last_selection != selection:
 
 # --- HEADER ---
 st.title("Buku Ajar Aplikasi Komputer Statistik")
-st.markdown(f"**Penyusun:** Ir. M Nasri AW, M.Eng.Sc, M.Kom - STIE Indonesia Malang, @2025")
+st.markdown(f"**Penyusun:** Ir. M Nasri AW, M.Eng.Sc, M.Kom - Dosen STIE Indonesia Malang, @2025")
 st.divider()
 
 # --- LOGIKA TAMPILAN ---
 current = materi[selection]
 
 if selection == "Halaman Utama":
-    col1, col2 = st.columns([1, 1.5])
-    with col1: st.image(current["file"], use_container_width=True)
-    with col2: st.info("Selamat datang di platform digital perkuliahan Aplikom Statistik.")
+    col1 = st.columns([90, 1])
+    col1[0].info(
+        "Selamat datang di platform digital perkuliahan Aplikom Statistik. "
+        "Buku ini merupakan kelanjutan (melengkapi) kuliah Economic Statistics, disusun dengan bahasa yang sederhana dan mudah dipahami. Penulis berharap buku ini dapat membantu mahasiswa memahami prinsip-prinsip statistik, dilengkapi contoh mengerjakannya dengan Spreadsheet, Software PSPP (Perfect Statistics Professional Presented, alternatif open source selain SPSS) dan Pemrograman Python. "
+        "Contoh sederhana dari masalah sehari-hari di Manajemen dan Keuangan. Sistematika buku ajar ini, tiap bab dimulai dengan Pokok Bahasan dan Tujuan Pembelajaran, sub bab dan penjelasannya dan Rangkuman, Contoh soal dan Tugas. Tiap bab sesuai pertemuan kuliah (mingguan), minggu ke-8 dilaksanakan Ujian Tengah Semester (UTS) dan minggu ke-16 Ujian Akhir Semester (UAS). "
+        "Untuk memberikan pemahaman bagaimana mengerjakan dengan Aplikasi Komputer, di akhir buku diberikan lampiran source code python untuk Contoh Soal dan Tugas. "
+        "Selamat belajar, semoga sukses dan bermanfaat untuk karir profesional di bidang Manajemen, Keuangan, Data Science, dan Riset Akademik."
+    )
 
 else:
     st.header(selection)
@@ -245,8 +250,7 @@ else:
         st.subheader("🐍 Kumpulan Contoh Soal (Lampiran-1)")
         tabs = st.tabs([f"Soal {i}" for i in range(1, 11)])
         for i, tab in enumerate(tabs):
-            with tab:
-                st.code(list_contoh_soal[f"Soal-{i+1}"], language='python')
+            tab.code(list_contoh_soal[f"Soal-{i+1}"], language='python')
     
     elif current.get("kode"):
         st.subheader("🐍 Contoh Coding Python")
